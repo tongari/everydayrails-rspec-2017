@@ -7,9 +7,15 @@ FactoryBot.define do
 
     # メモ付きのプロジェクト
     trait :with_notes do
-      # after(:create) { |project|
       after(:create) { |project|
         create_list(:note, 5, project: project)
+      }
+    end
+
+    # タスク付きのプロジェクト
+    trait :with_tasks do
+      after(:create) { |project|
+        create_list(:task, 5, project: project)
       }
     end
 

@@ -89,4 +89,10 @@ RSpec.describe Project, type: :model do
     project = FactoryBot.create :project, :with_notes
     expect(project.notes.length).to eq 5
   end
+
+  # タスクが作成されていること
+  it 'make valid task' do
+    project = FactoryBot.create(:project, :with_tasks)
+    expect(project.tasks.length).not_to eq 0
+  end
 end
