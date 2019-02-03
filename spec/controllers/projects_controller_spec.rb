@@ -73,6 +73,34 @@ RSpec.describe ProjectsController, type: :controller do
     end
   end
 
+  describe '#new' do
+    # 認証済みユーザ
+    context 'as an authorized user' do
+      before do
+        @user = FactoryBot.create(:user)
+        @project = FactoryBot.create(:project, owner: @user)
+      end
+
+      # 正常にレスポンスを返すこと
+      it 'responds successfully' do
+        sign_in @user
+        get :new
+        expect(response).to be_success
+      end
+    end
+
+    # ゲストとして
+    context 'a guest user' do
+
+      # サインイン画面にリダイレクトすること
+      it 'redirects to the sing-in page' do
+        get :new
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+
+  end
+
   describe '#create' do
     # 認証済みのユーザーとして
     context 'as an authenticated user' do
