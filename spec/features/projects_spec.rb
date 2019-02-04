@@ -27,7 +27,8 @@ RSpec.feature "Projects", type: :feature do
   # ゲストがプロジェクトを追加する
   scenario 'guest adds a project' do
     visit projects_path
-    click_link 'New Project'
+    # click_link 'New Project'
+    expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
 
  end
