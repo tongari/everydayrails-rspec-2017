@@ -1,15 +1,22 @@
 require 'rails_helper'
 
 RSpec.feature "Projects", type: :feature do
+
+  # include LoginSupport
+  # include Devise::Test::IntegrationHelpers
   # ユーザは新しいプロジェクトを作成する
   scenario 'user create a new project' do
     user  = FactoryBot.create(:user)
 
+    # visit root_path
+    # click_link 'Sign in'
+    # fill_in 'Email', with: user.email
+    # fill_in 'Password', with: user.password
+    # click_button 'Log in'
+    #spec/support/login_support.rbで定義したspecのヘルパー
+    # sign_in_as user
+    sign_in user
     visit root_path
-    click_link 'Sign in'
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_button 'Log in'
 
     expect {
       click_link 'New Project'
