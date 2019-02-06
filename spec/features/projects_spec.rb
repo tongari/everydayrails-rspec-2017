@@ -19,7 +19,7 @@ RSpec.feature "Projects", type: :feature do
     visit root_path
 
     expect {
-      click_link 'new Project'
+      click_link 'New Project'
       fill_in 'Name', with: 'Test Project'
       fill_in 'Description', with: 'Trying out Capybara'
       click_button 'Create Project'
