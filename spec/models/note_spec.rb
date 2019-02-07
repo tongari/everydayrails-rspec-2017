@@ -5,6 +5,13 @@ RSpec.describe Note, type: :model do
   let(:user) { FactoryBot.create(:user) }
   let(:project) { FactoryBot.create(:project, owner: user) }
 
+  it { is_expected.to have_attached_file(:attachment) }
+
+  it 'is valid with attachment' do
+    note = FactoryBot.build(:note, :with_attachment, project: project)
+    expect(note.attachment_file_name).to eq 'attachment.jpg'
+  end
+
   # ユーザー、プロジェット、メッセージがあれば有効な状態であること
   it 'is valid with a user, project, and message' do
     note = Note.new(

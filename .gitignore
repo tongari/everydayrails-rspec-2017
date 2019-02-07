@@ -28,3 +28,10 @@
 .ruby-version
 .idea/
 vendor/bundle/
+
+# Paperclip によってアップロードされたファイルを無視する
+/public/system
+/spec/test_uploads
+
+# vcrで作成したcasetteファイルを無視する
+/spec/cassettes/

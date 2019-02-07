@@ -38,6 +38,8 @@ group :test do
   gem 'shoulda-matchers',
       git: 'https://github.com/thoughtbot/shoulda-matchers.git',
       branch: 'rails-5'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 #
