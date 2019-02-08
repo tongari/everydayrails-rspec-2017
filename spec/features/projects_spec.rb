@@ -45,4 +45,26 @@ RSpec.feature "Projects", type: :feature do
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
 
+  # ユーザはプロジェクトを完了済みにする
+  scenario 'user completes a project' do
+    # プロジェクトを持ったユーザを準備する
+    user = FactoryBot.create(:user)
+    project = FactoryBot.create(:project, owner: user)
+    # ユーザはログインしている
+    sign_in user
+    # ユーザがプロジェクト画面を開き、
+    visit project_path(project)
+    # 完了済みのラベルが表示されていない
+    expect(page).to_not have_content 'Completed'
+    # completeボタンをクリックすると、
+    click_button 'Complete'
+    # プロジェクトは完了済みとしてマークされる
+    expect(project.reload.completed?).to be true
+    # フラッシュメッセージでプロジェクトが完了した旨が表示される
+    expect(page).to have_content 'Congratulations, this project is complete!'
+    # 完了済みのラベルが表示される
+    expect(page).to have_content 'Completed'
+    # 完了済みにするボタンが存在しない
+    expect(page).to_not have_button 'Complete'
+  end
  end
