@@ -6,7 +6,6 @@ RSpec.describe UserMailer, type: :mailer do
     let(:mail) { UserMailer.welcome_email(user) }
 
     it "sends a welcome email to the user's email address" do
-      binding.pry
       expect(mail.to).to eq [user.email]
     end
 
