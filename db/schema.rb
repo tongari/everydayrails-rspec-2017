@@ -10,12 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190410145143) do
+ActiveRecord::Schema.define(version: 20190413070616) do
 
   create_table "accounts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "subdomain"
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.integer "author_id"
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "name", null: false
+    t.index ["author_id"], name: "index_books_on_author_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -53,6 +68,20 @@ ActiveRecord::Schema.define(version: 20190410145143) do
     t.integer "user_id"
     t.boolean "completed"
     t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "s_accounts", force: :cascade do |t|
+    t.integer "supplier_id"
+    t.string "account_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplier_id"], name: "index_s_accounts_on_supplier_id"
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.text "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|
